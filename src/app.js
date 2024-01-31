@@ -9,7 +9,7 @@ import messageRouter from "./routers/message.router.js";
 import Admission from "./models/admission.model.js";
 app.use(
   express.json({
-    limit: "50kb",
+    limit: "200kb",
   })
 );
 app.use(
@@ -18,7 +18,9 @@ app.use(
   })
 );
 
-app.use(cors());
+app.use(cors({
+  origin:["https://rpaic.netlify.app","http://localhost:5173"]
+}));
 app.use(express.static("public"));
 app.use(cookieParser());
 
