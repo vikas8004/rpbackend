@@ -19,7 +19,7 @@ app.use(
 );
 
 app.use(cors({
-  origin:["rpaic.netlify.app"]
+  origin:["https://rpaic.netlify.app"]
 }));
 app.use(express.static("public"));
 app.use(cookieParser());
