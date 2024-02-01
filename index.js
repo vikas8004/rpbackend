@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({
+  path:"./"
+});
 import app from "./src/app.js";
 import connect from "./src/db/conn.js";
 
