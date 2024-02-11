@@ -2,7 +2,6 @@ import Admission from "../models/admission.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import uploadImage from "../utils/cloudinary.uploader.js";
 import ApiResponse from "../utils/ApiResponse.js";
-import ApiError from "../utils/ApiError.js";
 
 const studentAdmission = asyncHandler(async (req, res) => {
   // console.log(req.body);

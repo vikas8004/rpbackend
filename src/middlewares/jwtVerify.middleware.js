@@ -5,9 +5,10 @@ import Admin from "../models/registerAsAdmin.model.js";
 
 const verifyToken = asyncHandler(async (req, _, next) => {
   try {
+    // console.log(req.header("Authorization"));
     const token =
       req.cookies?.accessToken ||
-      req.header("Authorization").replace("Bearer ", "");
+      req.headers.authorization.replace("Bearer ", "");
     if (!token) {
       throw new ApiError(401, "unauthorized request");
     }

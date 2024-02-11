@@ -35,6 +35,7 @@ const regitsterAdmin = asyncHandler(async (req, res) => {
 
 const loginAdmin = asyncHandler(async (req, res) => {
   const { userName, password } = req.body;
+  // console.log(req.headers);
   if (!userName && !password) {
     throw new ApiError(400, "provide all the necessary details");
   }
@@ -45,7 +46,7 @@ const loginAdmin = asyncHandler(async (req, res) => {
   const isCorrectPassword = await foundUser.checkPassword(password);
   if (!isCorrectPassword) {
     throw new ApiError(401, "Invalid credentials or user does not exist");
-  } 
+  }
   const { accessToken } = await generateToken(foundUser._id);
   const loggedInUser = await Admin.findById(foundUser._id).select("-password");
 
