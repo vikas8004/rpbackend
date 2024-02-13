@@ -3,6 +3,7 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import uploadImage from "../utils/cloudinary.uploader.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import ApiError from "../utils/ApiError.js";
+import getDataUri from "../utils/getDataUri.js";
 
 const studentAdmission = asyncHandler(async (req, res) => {
   // console.log(req.body);
@@ -26,10 +27,11 @@ const studentAdmission = asyncHandler(async (req, res) => {
     subjects,
     gender,
   } = req.body;
-  const imagePath = req.files.image[0].path;
-  const studentSignaturePath = req.files.studentSignature[0].path;
-  const uploadedImage = await uploadImage(imagePath);
-  const uploadedStudentSignature = await uploadImage(studentSignaturePath);
+  const imagePath = getDataUri(req.files.image[0]);
+  const studentSignaturePath = getDataUri(req.files.studentSignature[0]);
+
+  const uploadedImage = await uploadImage(imagePath.content);
+  const uploadedStudentSignature = await uploadImage(studentSignaturePath.content);
   const image = {
     public_id: uploadedImage.public_id,
     secure_url: uploadedImage.secure_url,
