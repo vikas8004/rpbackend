@@ -23,13 +23,13 @@ app.use(cors({
 
 app.use(express.static("public"));
 app.use(cookieParser());
-app.use(cors());
+
 app.use("/api/v1", adminRouter);
 app.use("/api/v1", addResultRouter);
 app.use("/api/v1", showResultRouter);
 app.use("/api/v1", messageRouter);
-app.use("/", async (req, res) => {
-  const resu = await Admission.findOne({ rollno: "240801" });
-  res.send(resu);
-});
+// app.use("/", async (req, res) => {
+//   const resu = await Admission.findOne({ rollno: "240801" });
+//   res.send(resu);
+// });
 export default app;

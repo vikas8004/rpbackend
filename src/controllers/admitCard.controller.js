@@ -8,22 +8,24 @@ const showAdmitCard = asyncHandler(async (req, res) => {
   console.log(req.body);
   const foundStu = await Admission.findOne({ rollno, schoolName });
   if (!foundStu) {
-    return res.status(400).json(new ApiResponse(400,{},"failed"))
+    return res.status(400).json(new ApiResponse(400, {}, "failed"));
   }
-  const { image, standard, fatherName, fullName, address, mobileNo } = foundStu;
+  const { image, standard, fatherName, fullName, gender, dob } = foundStu;
 
-  return res.status(200).json(new ApiResponse(200,{
-    fullName,
-    image,
-    standard,
-    mobileNo,
-    fatherName,
-    address,
-    rollno,
-    schoolName,
-    year,
-    admitCardType,
-  }));
+  return res.status(200).json(
+    new ApiResponse(200, {
+      fullName,
+      image,
+      standard,
+      dob,
+      fatherName,
+      gender,
+      rollno,
+      schoolName,
+      year,
+      admitCardType,
+    })
+  );
 });
 
 export default showAdmitCard;

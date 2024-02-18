@@ -18,7 +18,7 @@ const studentAdmission = asyncHandler(async (req, res) => {
     fatherOccupation,
     motherName,
     address,
-    caste,
+    category,
     relegion,
     dob,
     lastSchool,
@@ -26,12 +26,19 @@ const studentAdmission = asyncHandler(async (req, res) => {
     mobileNo,
     subjects,
     gender,
+    year,
   } = req.body;
+  const foundStu = await Admission.findOne({ rollno, schoolName });
+  if(foundStu){
+    throw new ApiError(400,"student already exist",)
+  }
   const imagePath = getDataUri(req.files.image[0]);
   const studentSignaturePath = getDataUri(req.files.studentSignature[0]);
 
   const uploadedImage = await uploadImage(imagePath.content);
-  const uploadedStudentSignature = await uploadImage(studentSignaturePath.content);
+  const uploadedStudentSignature = await uploadImage(
+    studentSignaturePath.content
+  );
   const image = {
     public_id: uploadedImage.public_id,
     secure_url: uploadedImage.secure_url,
@@ -50,7 +57,7 @@ const studentAdmission = asyncHandler(async (req, res) => {
     fatherOccupation,
     motherName,
     address,
-    caste,
+    category,
     relegion,
     dob,
     lastSchool,
@@ -60,6 +67,7 @@ const studentAdmission = asyncHandler(async (req, res) => {
     gender,
     image,
     studentSignature,
+    year,
   });
 
   return res.status(201).json(new ApiResponse(200, registeredStudent));
