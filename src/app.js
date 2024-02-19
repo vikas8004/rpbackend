@@ -7,6 +7,7 @@ import addResultRouter from "./routers/addResultRouter.js";
 import showResultRouter from "./routers/showResultRouter.js";
 import messageRouter from "./routers/message.router.js";
 import Admission from "./models/admission.model.js";
+import studentHomeRouter from "./routers/studentDetails.router.js";
 app.use(
   express.json()
 );
@@ -28,6 +29,7 @@ app.use("/api/v1", adminRouter);
 app.use("/api/v1", addResultRouter);
 app.use("/api/v1", showResultRouter);
 app.use("/api/v1", messageRouter);
+app.use("/api/v1",studentHomeRouter)
 // app.use("/", async (req, res) => {
 //   const resu = await Admission.findOne({ rollno: "240801" });
 //   res.send(resu);
