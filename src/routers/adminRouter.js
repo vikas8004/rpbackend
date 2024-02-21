@@ -16,6 +16,7 @@ import {
 import { addTeacher } from "../controllers/teacher.controller.js";
 import { ViewIdCard } from "../controllers/icard.controller.js";
 import { PrintAdmitCard } from "../controllers/printAdmiCard.controller.js";
+import { deleteNotice, getNotice, setNotice } from "../controllers/notice.controller.js";
 
 const adminRouter = express.Router();
 
@@ -34,6 +35,9 @@ adminRouter.route("/student/show-admit-card").post(showAdmitCard);
 adminRouter.route("/student/details").post(fetchStudentDetails);
 adminRouter.route("/student/totalstudent").get(groupWiseStu);
 adminRouter.route("/teacher/registration").post(addTeacher);
-adminRouter.route("/student/idcard").post(ViewIdCard)
-adminRouter.route("/student/admitcard/print-admit-card").post(PrintAdmitCard)
+adminRouter.route("/student/idcard").post(ViewIdCard);
+adminRouter.route("/student/admitcard/print-admit-card").post(PrintAdmitCard);
+adminRouter.route("/set-notice").post(setNotice);
+adminRouter.route("/get-notice").get(getNotice);
+adminRouter.route("/delete-notice").delete(deleteNotice);
 export default adminRouter;
