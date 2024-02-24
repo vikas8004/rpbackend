@@ -19,7 +19,7 @@ const addAllResult1112 = asyncHandler(async (req, res) => {
     mathPrac,
     bioPrac,
     chemisPrac,
-    psyPrac,
+    phyPrac,
   } = req.body;
   const foundRes = await AllResult1112.findOne({
     term,
@@ -48,7 +48,7 @@ const addAllResult1112 = asyncHandler(async (req, res) => {
       mathPrac,
       bioPrac,
       chemisPrac,
-      psyPrac,
+      phyPrac,
     });
     res.status(200).send(new ApiResponse(200, addedRes));
   }
