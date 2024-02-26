@@ -39,7 +39,7 @@ adminRouter.route("/student/registration").post(
 adminRouter.route("/student/show-admit-card").post(showAdmitCard);
 adminRouter.route("/student/details").post(fetchStudentDetails);
 adminRouter.route("/student/totalstudent").get(groupWiseStu);
-adminRouter.route("/teacher/registration").post(addTeacher);
+adminRouter.route("/teacher/registration").post(upload.single("image"),addTeacher);
 adminRouter.route("/student/idcard").post(ViewIdCard);
 adminRouter.route("/student/admitcard/print-admit-card").post(PrintAdmitCard);
 adminRouter.route("/set-notice").post(setNotice);
