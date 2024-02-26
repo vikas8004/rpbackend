@@ -15,6 +15,7 @@ const uploadImage = async (localPath) => {
     // if (res) {
     //   fs.unlinkSync(localPath);
     // }
+    // console.log(res);
     return res;
   } catch (error) {
     // fs.unlinkSync(localPath);

@@ -6,7 +6,7 @@ import ApiError from "../utils/ApiError.js";
 import getDataUri from "../utils/getDataUri.js";
 
 const studentAdmission = asyncHandler(async (req, res) => {
-  // console.log(req.body);
+  // console.log(req.files);
 
   const {
     schoolName,
@@ -39,6 +39,7 @@ const studentAdmission = asyncHandler(async (req, res) => {
   const uploadedStudentSignature = await uploadImage(
     studentSignaturePath.content
   );
+  console.log(image,studentSignature);
   const image = {
     public_id: uploadedImage.public_id,
     secure_url: uploadedImage.secure_url,
@@ -47,6 +48,7 @@ const studentAdmission = asyncHandler(async (req, res) => {
     public_id: uploadedStudentSignature.public_id,
     secure_url: uploadedStudentSignature.secure_url,
   };
+  
   const registeredStudent = await Admission.create({
     schoolName,
     standard,
