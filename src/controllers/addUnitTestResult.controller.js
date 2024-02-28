@@ -20,48 +20,35 @@ const addUnitTestResult = asyncHandler(async (req, res) => {
     schoolName,
     test,
   } = req.body;
-  let arr = [
-    pt,
-    drawing,
-    gk,
-    computer,
-    sanskrit,
-    socialStudy,
-    science,
-    math,
-    english,
-    hindi,
-    rollno,
-    year,
-    schoolName,
-    test,
-  ];
-  if (arr.some((val) => val === "")) {
-    throw new ApiError(400, "fill out all the field");
+
+  const foundRes = await UnitTest.findOne({ rollno, schoolName, test, year });
+  if (foundRes) {
+    res
+      .status(500)
+      .send(new ApiResponse(500, { message: "Result already exist" }));
+  } else {
+    const addedResult = await UnitTest.create({
+      pt,
+      drawing,
+      gk,
+      computer,
+      sanskrit,
+      socialStudy,
+      science,
+      math,
+      english,
+      hindi,
+      rollno,
+      year,
+      schoolName,
+      test,
+    });
+    if (!addedResult) {
+      return res
+        .status(400)
+        .json(new ApiResponse(400, null, "result could not be uplodaed"));
+    }
+    res.status(201).json(new ApiResponse(200, addedResult));
   }
-  const addedResult = await UnitTest.create({
-    pt,
-    drawing,
-    gk,
-    computer,
-    sanskrit,
-    socialStudy,
-    science,
-    math,
-    english,
-    hindi,
-    rollno,
-    year,
-    schoolName,
-    test,
-  });
-  if (!addedResult) {
-    return res
-      .status(400)
-      .json(new ApiResponse(400, null, "result could not be uplodaed"));
-  }
-  res
-    .status(201)
-    .json(new ApiResponse(200, addedResult, "Result added successfully"));
 });
 export default addUnitTestResult;
