@@ -45,9 +45,10 @@ const loginAdmin = asyncHandler(async (req, res) => {
   const isCorrectPassword = await foundUser.checkPassword(password);
   if (!isCorrectPassword) {
     throw new ApiError(401, "Invalid credentials or user does not exist");
-  } 
+  }
   const { accessToken } = await generateToken(foundUser._id);
   const loggedInUser = await Admin.findById(foundUser._id).select("-password");
+  // console.log(accessToken);
 
   const options = {
     httpOnly: true,
