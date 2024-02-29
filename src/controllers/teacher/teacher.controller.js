@@ -1,8 +1,8 @@
-import Teacher from "../models/teacher.model.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import uploadImage from "../utils/cloudinary.uploader.js";
-import ApiResponse from "../utils/ApiResponse.js";
-import getDataUri from "../utils/getDataUri.js";
+import Teacher from "../../models/teacher/teacher.model.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import uploadImage from "../../utils/cloudinary.uploader.js";
+import ApiResponse from "../../utils/ApiResponse.js";
+import getDataUri from "../../utils/getDataUri.js";
 const addTeacher = asyncHandler(async (req, res) => {
   // console.log(req.body, req.file);
   try {

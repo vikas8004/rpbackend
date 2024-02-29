@@ -13,6 +13,10 @@ const teacherSchema = new Schema(
       type: String,
       required: true,
     },
+    tid: {
+      type: String,
+      required: true,
+    },
     address: {
       type: String,
       required: true,
@@ -44,7 +48,7 @@ const teacherSchema = new Schema(
     },
     subjects: [
       {
-        type: String
+        type: String,
       },
     ],
     gender: {

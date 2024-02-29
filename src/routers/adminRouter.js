@@ -13,7 +13,6 @@ import {
   fetchStudentDetails,
   groupWiseStu,
 } from "../controllers/fetchStudentData.controller.js";
-import { addTeacher } from "../controllers/teacher.controller.js";
 import { ViewIdCard } from "../controllers/icard.controller.js";
 import { PrintAdmitCard } from "../controllers/printAdmiCard.controller.js";
 import {
@@ -24,6 +23,8 @@ import {
 import finalResult from "../controllers/finalResultController.js";
 import { submittedFee } from "../controllers/fee/feeSubmit.controller.js";
 import receiptController from "../controllers/fee/receiptNoController.js";
+import { addTeacher } from "../controllers/teacher/teacher.controller.js";
+import printAdmissionFormPdf from "../controllers/student/studentRegPdf.controller.js";
 
 const adminRouter = express.Router();
 
@@ -50,6 +51,7 @@ adminRouter.route("/set-notice").post(setNotice);
 adminRouter.route("/get-notice").get(getNotice);
 adminRouter.route("/delete-notice").delete(deleteNotice);
 adminRouter.route("/student/final-result").post(finalResult);
+adminRouter.route("/student/printadmissionpdf").post(printAdmissionFormPdf)
 
 //fee router
 adminRouter.route("/student/submit-fee").post(submittedFee);

@@ -7,6 +7,7 @@ import addResultRouter from "./routers/addResultRouter.js";
 import showResultRouter from "./routers/showResultRouter.js";
 import messageRouter from "./routers/message.router.js";
 import studentHomeRouter from "./routers/studentDetails.router.js";
+import path from "path";
 app.use(express.json());
 app.use(
   express.urlencoded({
@@ -21,7 +22,6 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(express.static("public"));
 
 app.use("/api/v1", adminRouter);
 app.use("/api/v1", addResultRouter);

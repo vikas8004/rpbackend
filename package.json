@@ -1,7 +1,7 @@
 {
   "name": "rpadarsh",
   "version": "1.0.0",
-  "description": "this website is all about creating the frontend and the backend of the rp adarsh inter college rehar basti.",
+  "description": "this website is all about the backend of the rp adarsh inter college rehar basti.",
   "main": "index.js",
   "type": "module",
   "scripts": {
