@@ -25,6 +25,7 @@ import { submittedFee } from "../controllers/fee/feeSubmit.controller.js";
 import receiptController from "../controllers/fee/receiptNoController.js";
 import { addTeacher } from "../controllers/teacher/teacher.controller.js";
 import printAdmissionFormPdf from "../controllers/student/studentRegPdf.controller.js";
+import viewAllTeachers from "../controllers/teacher/viewTeacher.controller.js";
 
 const adminRouter = express.Router();
 
@@ -42,16 +43,21 @@ adminRouter.route("/student/registration").post(
 adminRouter.route("/student/show-admit-card").post(showAdmitCard);
 adminRouter.route("/student/details").post(fetchStudentDetails);
 adminRouter.route("/student/totalstudent").get(groupWiseStu);
+
+//!  teacher router
 adminRouter
   .route("/teacher/registration")
   .post(upload.single("image"), addTeacher);
+adminRouter.route("/teacher/show-teachers").get(viewAllTeachers)
+
+  // ohter routers
 adminRouter.route("/student/idcard").post(ViewIdCard);
 adminRouter.route("/student/admitcard/print-admit-card").post(PrintAdmitCard);
 adminRouter.route("/set-notice").post(setNotice);
 adminRouter.route("/get-notice").get(getNotice);
 adminRouter.route("/delete-notice").delete(deleteNotice);
 adminRouter.route("/student/final-result").post(finalResult);
-adminRouter.route("/student/printadmissionpdf").post(printAdmissionFormPdf)
+adminRouter.route("/student/printadmissionpdf").post(printAdmissionFormPdf);
 
 //fee router
 adminRouter.route("/student/submit-fee").post(submittedFee);

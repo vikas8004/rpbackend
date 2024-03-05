@@ -1,6 +1,7 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import Admission from "../models/admission.model.js";
 import ApiResponse from "../utils/ApiResponse.js";
+import Teacher from "../models/teacher/teacher.model.js";
 const fetchStudentDetails = asyncHandler(async (req, res) => {
   // console.log(req.body);
   const { schoolName, standard, year } = req.body;
@@ -24,7 +25,10 @@ const groupWiseStu = asyncHandler(async (req, res) => {
       },
     },
   ]);
-  res.status(200).json(new ApiResponse(200, groupedData));
+
+  const noOfTeachers=await Teacher.find().countDocuments()
+  res.status(200).json(new ApiResponse(200, {groupedData,noOfTeachers}));
+
 });
 
 export { fetchStudentDetails, groupWiseStu };
