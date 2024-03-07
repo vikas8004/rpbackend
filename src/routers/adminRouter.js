@@ -3,6 +3,7 @@ import {
   regitsterAdmin,
   loginAdmin,
   logoutAdmin,
+  verifyLogin,
 } from "../controllers/register.controller.js";
 import verifyToken from "../middlewares/jwtVerify.middleware.js";
 import studentAdmission from "../controllers/admission.controller.js";
@@ -32,6 +33,7 @@ const adminRouter = express.Router();
 adminRouter.route("/admin/register").post(regitsterAdmin);
 adminRouter.route("/admin/login").post(loginAdmin);
 adminRouter.route("/admin/logout").post(verifyToken, logoutAdmin);
+adminRouter.route("/admin/verify-login").get(verifyLogin)
 adminRouter.route("/student/registration").post(
   upload.fields([
     { name: "image", maxCount: 1 },

@@ -2,6 +2,7 @@ import jsonwebtoken from "jsonwebtoken";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import Admin from "../models/registerAsAdmin.model.js";
+import ApiResponse from "../utils/ApiResponse.js";
 
 const verifyToken = asyncHandler(async (req, _, next) => {
   try {

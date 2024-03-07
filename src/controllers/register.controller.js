@@ -2,6 +2,7 @@ import ApiError from "../utils/ApiError.js";
 import ApiResponse from "../utils/ApiResponse.js";
 import Admin from "../models/registerAsAdmin.model.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
+import jsonwebtoken from "jsonwebtoken";
 const generateToken = async function (userId) {
   try {
     const foundUser = await Admin.findById(userId);
@@ -52,7 +53,8 @@ const loginAdmin = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true,
-    secure: true,
+    // secure: true,
+    maxAge: 60 * 60 * 1000,
   };
   res
     .status(200)
@@ -77,7 +79,37 @@ const logoutAdmin = asyncHandler(async (req, res) => {
     .status(200)
     .clearCookie("accessToken", options)
     .json(
-      new ApiResponse(200, {}, `${user.userName} , you are logout successfully`)
+      new ApiResponse(
+        200,
+        { status: true },
+        `${user.userName} , you are logout successfully`
+      )
     );
 });
-export { regitsterAdmin, loginAdmin, logoutAdmin };
+const verifyLogin = asyncHandler(async (req, res) => {
+  // console.log(req.cookies);
+  const token = req.cookies?.accessToken;
+  if (!token) {
+    res.status(200).send(new ApiResponse(200, { status: false }));
+  } else {
+    const decodedDetails = await jsonwebtoken.verify(
+      token,
+      process.env.ACCESS_TOKEN_SECRET
+    );
+    console.log(decodedDetails);
+    if (!decodedDetails) {
+      res
+        .status(200)
+        .send(
+          new ApiResponse(200, { message: "invalid token", status: false })
+        );
+    } else {
+      res
+        .status(200)
+        .send(
+          new ApiResponse(200, { message: "user authenticated", status: true,decodedDetails,token })
+        );
+    }
+  }
+});
+export { regitsterAdmin, loginAdmin, logoutAdmin, verifyLogin };
