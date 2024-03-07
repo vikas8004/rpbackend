@@ -53,8 +53,9 @@ const loginAdmin = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     maxAge: 60 * 60 * 1000,
+    sameSite:"none"
   };
   res
     .status(200)
@@ -87,7 +88,7 @@ const logoutAdmin = asyncHandler(async (req, res) => {
     );
 });
 const verifyLogin = asyncHandler(async (req, res) => {
-  // console.log(req.cookies);
+  console.log(req.cookies);
   const token = req.cookies?.accessToken;
   if (!token) {
     res.status(200).send(new ApiResponse(200, { status: false }));
