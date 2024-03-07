@@ -75,10 +75,12 @@ const logoutAdmin = asyncHandler(async (req, res) => {
   const options = {
     httpOnly: true,
     secure: true,
+    maxAge: 60 * 60 * 1000,
+    sameSite: "none",
   };
   return res
     .status(200)
-    .clearCookie("accessToken")
+    .clearCookie("accessToken",options)
     .json(
       new ApiResponse(
         200,
