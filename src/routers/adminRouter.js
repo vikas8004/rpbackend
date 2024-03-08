@@ -33,7 +33,7 @@ const adminRouter = express.Router();
 adminRouter.route("/admin/register").post(regitsterAdmin);
 adminRouter.route("/admin/login").post(loginAdmin);
 adminRouter.route("/admin/logout").post(verifyToken, logoutAdmin);
-adminRouter.route("/admin/verify-login").get(verifyLogin)
+// adminRouter.route("/admin/verify-login").get(verifyLogin)
 adminRouter.route("/student/registration").post(
   upload.fields([
     { name: "image", maxCount: 1 },

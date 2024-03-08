@@ -56,10 +56,10 @@ const loginAdmin = asyncHandler(async (req, res) => {
     secure: true,
     maxAge: 60 * 60 * 1000,
     sameSite: "none",
+    path: "/",
   };
   res
     .status(200)
-    .cookie("accessToken", accessToken, options)
     .json(
       new ApiResponse(200, {
         message: "Logged in successfully!",
@@ -77,10 +77,10 @@ const logoutAdmin = asyncHandler(async (req, res) => {
     secure: true,
     maxAge: 60 * 60 * 1000,
     sameSite: "none",
+    path: "/",
   };
   return res
     .status(200)
-    .clearCookie("accessToken")
     .json(
       new ApiResponse(
         200,
@@ -107,16 +107,14 @@ const verifyLogin = asyncHandler(async (req, res) => {
           new ApiResponse(200, { message: "invalid token", status: false })
         );
     } else {
-      res
-        .status(200)
-        .send(
-          new ApiResponse(200, {
-            message: "user authenticated",
-            status: true,
-            decodedDetails,
-            token,
-          })
-        );
+      res.status(200).send(
+        new ApiResponse(200, {
+          message: "user authenticated",
+          status: true,
+          decodedDetails,
+          token,
+        })
+      );
     }
   }
 });
