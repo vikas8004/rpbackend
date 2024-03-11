@@ -23,4 +23,9 @@ const uploadImage = async (localPath) => {
   }
 };
 
+const deleteImage = async (public_id) => {
+  const result = await cloudinary.uploader.destroy(public_id);
+  return result;
+};
+export {deleteImage}
 export default uploadImage;

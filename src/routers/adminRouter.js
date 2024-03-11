@@ -6,7 +6,7 @@ import {
   verifyLogin,
 } from "../controllers/register.controller.js";
 import verifyToken from "../middlewares/jwtVerify.middleware.js";
-import studentAdmission from "../controllers/admission.controller.js";
+import studentAdmission, { updateStu } from "../controllers/admission.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import checkStudent from "../middlewares/checkingStudent.middleware.js";
 import showAdmitCard from "../controllers/admitCard.controller.js";
@@ -27,7 +27,7 @@ import receiptController from "../controllers/fee/receiptNoController.js";
 import { addTeacher } from "../controllers/teacher/teacher.controller.js";
 import printAdmissionFormPdf from "../controllers/student/studentRegPdf.controller.js";
 import viewAllTeachers from "../controllers/teacher/viewTeacher.controller.js";
-
+import { updateAndPromote } from "../controllers/admission.controller.js";
 const adminRouter = express.Router();
 
 adminRouter.route("/admin/register").post(regitsterAdmin);
@@ -45,6 +45,11 @@ adminRouter.route("/student/registration").post(
 adminRouter.route("/student/show-admit-card").post(showAdmitCard);
 adminRouter.route("/student/details").post(fetchStudentDetails);
 adminRouter.route("/student/totalstudent").get(groupWiseStu);
+adminRouter.route("/student/update").post(updateAndPromote)
+adminRouter.route("/student/update-student").post(upload.fields([
+  { name: "image", maxCount: 1 },
+  { name: "studentSignature", maxCount: 1 },
+]),updateStu)
 
 //!  teacher router
 adminRouter
