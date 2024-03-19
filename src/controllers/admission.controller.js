@@ -95,7 +95,7 @@ const updateAndPromote = asyncHandler(async (req, res) => {
   }
 });
 const updateStu = asyncHandler(async (req, res) => {
-  // console.log(req.body);
+  // console.log(req.aadharNo);
   const { image, studentSignature } = req.files;
   const {
     schoolName,
@@ -160,7 +160,7 @@ const updateStu = asyncHandler(async (req, res) => {
         relegion,
         dob,
         lastSchool,
-        aadharNo,
+        aadharNo: aadharNo == "null" ? "123456789" : aadharNo,
         mobileNo,
         subjects: [subjects],
         gender,
