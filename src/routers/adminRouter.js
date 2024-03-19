@@ -30,7 +30,7 @@ import { addTeacher } from "../controllers/teacher/teacher.controller.js";
 import printAdmissionFormPdf from "../controllers/student/studentRegPdf.controller.js";
 import viewAllTeachers from "../controllers/teacher/viewTeacher.controller.js";
 import { updateAndPromote } from "../controllers/admission.controller.js";
-import { getResources, updateResource } from "../controllers/resource/resource.controller.js";
+import { deleteResource, getResources, updateResource } from "../controllers/resource/resource.controller.js";
 const adminRouter = express.Router();
 
 adminRouter.route("/admin/register").post(regitsterAdmin);
@@ -79,4 +79,5 @@ adminRouter.route("/student/submit-fee").post(submittedFee);
 // resource router
 adminRouter.route("/resource/update-resource").post(upload.single("file"),updateResource);
 adminRouter.route("/resource/get-resource").get(getResources);
+adminRouter.route("/resource/delete-resource").delete(deleteResource);
 export default adminRouter;
